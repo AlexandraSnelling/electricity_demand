@@ -1,3 +1,10 @@
+# Required Dependencies
+import pandas as pd
+import xgboost as xgb
+import matplotlib.pyplot as plt
+from joblib import load
+import streamlit as st
+
 # My Application
 # Step 1: Prepare Data 
 
@@ -70,8 +77,6 @@ plot_data.columns = ['Demand', 'Predicted Demand']
 
 # print(f"Mean Absolute Percentage Error: {mape}%")
 
-
-import streamlit as st
 
 # Plotting with Streamlit
 fig, ax = plt.subplots(figsize=(24, 6))
