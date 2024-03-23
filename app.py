@@ -4,6 +4,7 @@ import xgboost as xgb
 import matplotlib.pyplot as plt
 from joblib import load
 import streamlit as st
+import scikit-learn
 
 # My Application
 # Step 1: Prepare Data 
