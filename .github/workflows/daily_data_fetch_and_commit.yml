@@ -2,7 +2,7 @@ name: Daily Data Fetch and Commit
 
 on:
   schedule:
-    - cron: '30 17 * * *' # Runs at 4:30 AM UTC (2:45 AM Toronto time (Standard Time))
+    - cron: '45 19 * * *' # Runs at 7:45 PM UTC (3:45 PM Toronto time (Standard Time))
 
 jobs:
   fetch_and_process_data:
