@@ -24,7 +24,7 @@ jobs:
     - name: Fetch and Save Data
       env:
         API_KEY: ${{ secrets.API_KEY }}
-      run: python electricity_demand/scripts/fetch_and_save_data.py
+      run: python fetch_and_save_data.py
 
     - name: Commit and Push changes
       run: |
