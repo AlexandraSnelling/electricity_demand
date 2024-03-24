@@ -1,0 +1,29 @@
+name: Test Workflow
+
+on:
+  workflow_dispatch:  # This line enables manual triggering of the workflow
+
+jobs:
+  test_fetch_secret_key:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v2
+      
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        pip install pandas requests
+
+    - name: List directory contents
+      run: ls -l
+
+    - name: Print TEST Secret
+      env:
+        TEST: ${{ secrets.TEST }}
+      run: echo "TEST secret is $TEST"
