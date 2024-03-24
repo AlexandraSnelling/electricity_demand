@@ -2,8 +2,12 @@
 import pandas as pd
 import holidays
 import requests
+import os
 from sklearn.preprocessing import StandardScaler
 from datetime import datetime, timedelta
+
+# define API key
+API_KEY = os.getenv('API_KEY')
 
 ####################################################################################
 # Functions Required for Data Requests, Parsing, Joins, Engineering and Preparation:
@@ -145,7 +149,7 @@ def reorder_dataframe(df):
 ####################################################################################
 # Data Requests, Parsing, Joins, Engineering and Preparation:
 ####################################################################################
-# Fetch and parse historical data for 2024
+# Fetch and parse historical weather data for 2024
 
 # create empty list to hold parsed data
 parsed_data = []
