@@ -2,7 +2,8 @@ name: Daily Data Fetch and Commit
 
 on:
   schedule:
-    - cron: '15 22 * * *' # Runs at 10:15 PM UTC (?? Toronto time (Standard Time))
+    - cron: '23 15 * * *' # Runs at 11:15 PM UTC
+  workflow_dispatch:  # This line enables manual triggering of the workflow
 
 jobs:
   fetch_and_process_data:
@@ -15,7 +16,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.11' # Specify the Python version you are using
+        python-version: '3.11'
 
     - name: Install dependencies
       run: |
@@ -23,6 +24,11 @@ jobs:
 
     - name: List directory contents
       run: ls -l
+
+    - name: Print TEST Secret
+      env:
+        TEST: ${{ secrets.TEST }}
+      run: echo "TEST secret is $TEST"
 
     - name: Fetch and Save Data
       env:
