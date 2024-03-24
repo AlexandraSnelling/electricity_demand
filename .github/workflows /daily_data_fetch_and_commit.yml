@@ -2,7 +2,7 @@ name: Daily Data Fetch and Commit
 
 on:
   schedule:
-    - cron: '23 15 * * *' # Runs at 11:15 PM UTC
+    - cron: '23 07 * * *' # Runs at 11:15 PM UTC
   workflow_dispatch:  # This line enables manual triggering of the workflow
 
 jobs:
