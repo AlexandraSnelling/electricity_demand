@@ -95,8 +95,8 @@ plot_data.columns = ['Demand', 'Predicted Demand']
 
 # Plotting with Streamlit
 
-# Add your title here
-st.title('Hourly Toronto Electricity Demand Prediction')
+# # Add your title here
+# st.title('Hourly Toronto Electricity Demand Prediction')
 
 # Date range selection
 start_date, end_date = st.select_slider(
@@ -105,14 +105,14 @@ start_date, end_date = st.select_slider(
     value=(pd.to_datetime(plot_data.index).min().date(), pd.to_datetime(plot_data.index).max().date())
 )
 
-# inject custom CSS for the slider
-st.markdown("""
-<style>
-    .stSlider > div > div > div.css-1hwfws3 {
-        background-color: yellow !important;
-    }
-</style>
-""", unsafe_allow_html=True)
+# # inject custom CSS for the slider
+# st.markdown("""
+# <style>
+#     .stSlider > div > div > div.css-1hwfws3 {
+#         background-color: yellow !important;
+#     }
+# </style>
+# """, unsafe_allow_html=True)
 
 # Filter data based on the selected date range
 plot_data_filtered = plot_data[(plot_data.index >= str(start_date)) & (plot_data.index <= str(end_date))]
@@ -127,15 +127,15 @@ ax.legend()
 st.pyplot(fig)
 
 
-# # write with Streamlit
+# # # write with Streamlit
 # st.write(f"Mean Absolute Percentage Error: {mape}%")
 
-# Filter the original and predicted dataframes based on selected date range
-actual_filtered = y[(y.index >= str(start_date)) & (y.index <= str(end_date))]
-predictions_filtered = y_predict[(y_predict.index >= str(start_date)) & (y_predict.index <= str(end_date))]
+# # Filter the original and predicted dataframes based on selected date range
+# actual_filtered = y[(y.index >= str(start_date)) & (y.index <= str(end_date))]
+# predictions_filtered = y_predict[(y_predict.index >= str(start_date)) & (y_predict.index <= str(end_date))]
 
-# Recalculate MAPE with filtered data
-mape_filtered = round((abs((actual_filtered - predictions_filtered) / actual_filtered).mean()) * 100, 2)
+# # Recalculate MAPE with filtered data
+# mape_filtered = round((abs((actual_filtered - predictions_filtered) / actual_filtered).mean()) * 100, 2)
 
-# Display the updated MAPE
-st.write(f"Filtered Mean Absolute Percentage Error: {mape_filtered}%")
+# # Display the updated MAPE
+# st.write(f"Filtered Mean Absolute Percentage Error: {mape_filtered}%")
