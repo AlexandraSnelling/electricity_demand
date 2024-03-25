@@ -5,6 +5,9 @@ import matplotlib.pyplot as plt
 from joblib import load
 import streamlit as st
 
+# set the page to wide mode
+st.set_page_config(layout="wide")
+
 # Title of your app
 st.title('Hourly Electricity Demand:')
 st.title('Toronto Ontario')
@@ -125,7 +128,8 @@ ax.set_xlabel('Date/Time')
 ax.set_ylabel('Demand')
 ax.set_title('Hourly Toronto Electricity Demand vs. Predicted Demand')
 ax.legend()
-st.pyplot(fig)
+# st.pyplot(fig)
+st.pyplot()
 
 
 # # # write with Streamlit
