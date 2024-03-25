@@ -121,15 +121,15 @@ start_date, end_date = st.select_slider(
 # Filter data based on the selected date range
 plot_data_filtered = plot_data[(plot_data.index >= str(start_date)) & (plot_data.index <= str(end_date))]
 
-fig, ax = plt.subplots(figsize=(34, 8))  
+fig, ax = plt.subplots(figsize=(34, 12))  
 # plot_data.plot(ax=ax)
 plot_data_filtered.plot(ax=ax)
-ax.set_xlabel('Date/Time', fontsize=14)
-ax.set_ylabel('Demand', fontsize=14)
-ax.tick_params(axis='x', labelsize=12)
-ax.tick_params(axis='y', labelsize=12)  
-ax.set_title('Hourly Toronto Electricity Demand vs. Predicted Demand', fontsize=18)
-ax.legend(fontsize=14)
+ax.set_xlabel('Date/Time', fontsize=18)
+ax.set_ylabel('Demand', fontsize=18)
+ax.tick_params(axis='x', labelsize=16)
+ax.tick_params(axis='y', labelsize=16)  
+ax.set_title('Hourly Toronto Electricity Demand vs. Predicted Demand', fontsize=22)
+ax.legend(fontsize=22)
 st.pyplot(fig)
 
 
