@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 from joblib import load
 import streamlit as st
 
-# set the page to wide mode
-st.set_page_config(layout="wide")
+# # set the page to wide mode
+# st.set_page_config(layout="wide")
 
 # Title of your app
 st.title('Hourly Electricity Demand:')
