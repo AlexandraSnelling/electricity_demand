@@ -231,6 +231,6 @@ df = add_holiday_column(df)
 df = reorder_dataframe(df)
 
 # write dataframe to .csv
-df.to_csv('test_data_2024.csv', index=False)
+df.to_csv('data/test_data_2024.csv', index=False)
 
 ####################################################################################
