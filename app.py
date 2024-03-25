@@ -9,8 +9,7 @@ import streamlit as st
 st.set_page_config(layout="wide")
 
 # Title of your app
-st.title('Hourly Electricity Demand:')
-st.title('Toronto Ontario')
+st.title('Hourly Electricity Demand: Toronto Ontario')
 
 # Inject custom CSS with the <style> tag
 style = """
