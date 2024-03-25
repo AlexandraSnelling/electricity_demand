@@ -124,10 +124,12 @@ plot_data_filtered = plot_data[(plot_data.index >= str(start_date)) & (plot_data
 fig, ax = plt.subplots(figsize=(34, 8))  
 # plot_data.plot(ax=ax)
 plot_data_filtered.plot(ax=ax)
-ax.set_xlabel('Date/Time')
-ax.set_ylabel('Demand')
-ax.set_title('Hourly Toronto Electricity Demand vs. Predicted Demand')
-ax.legend()
+ax.set_xlabel('Date/Time', fontsize=14)
+ax.set_ylabel('Demand', fontsize=14)
+ax.tick_params(axis='x', labelsize=12)
+ax.tick_params(axis='y', labelsize=12)  
+ax.set_title('Hourly Toronto Electricity Demand vs. Predicted Demand', fontsize=18)
+ax.legend(fontsize=14)
 st.pyplot(fig)
 
 
