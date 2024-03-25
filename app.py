@@ -120,32 +120,11 @@ plot_data_filtered = plot_data[(plot_data.index >= str(start_date)) & (plot_data
 
 fig, ax = plt.subplots(figsize=(34, 8))  
 # plot_data.plot(ax=ax)
-# Set the figure (background) color
-fig.patch.set_facecolor('black')
-
-# Set the axes background color
-ax.set_facecolor('black')
-
-# Plotting your data with white lines or markers
-ax.plot(plot_data.index, plot_data['Demand'], color='white', label='Demand')  # Example line plot
-ax.plot(plot_data.index, plot_data['Predicted Demand'], color='white', linestyle='--', label='Predicted Demand')  # Example predicted line
-
-# Setting the axis labels and title with white color
-ax.set_xlabel('Date/Time', color='white')
-ax.set_ylabel('Demand', color='white')
-ax.set_title('Hourly Toronto Electricity Demand vs. Predicted Demand', color='white')
-
-# Setting tick parameters to ensure ticks are visible with white color
-ax.tick_params(colors='white', which='both')  # Change both major and minor ticks
-
-# Adjusting the legend to make it visible
-ax.legend(edgecolor='white', facecolor='black')
-
-# plot_data_filtered.plot(ax=ax)
-# ax.set_xlabel('Date/Time')
-# ax.set_ylabel('Demand')
-# ax.set_title('Hourly Toronto Electricity Demand vs. Predicted Demand')
-# ax.legend()
+plot_data_filtered.plot(ax=ax)
+ax.set_xlabel('Date/Time')
+ax.set_ylabel('Demand')
+ax.set_title('Hourly Toronto Electricity Demand vs. Predicted Demand')
+ax.legend()
 st.pyplot(fig)
 
 
