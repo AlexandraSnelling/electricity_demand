@@ -75,31 +75,7 @@ plot_data = pd.concat([test_data.set_index('ds')['y'], test_data_predictions.set
 plot_data.columns = ['Demand', 'Predicted Demand']
 
 
-# Step 3: Plot Data and Calculate MAPE
-
-# # Creating the plot
-# ax = plot_data.plot(figsize=(24, 6))
-
-# # Setting the axis labels
-# ax.set_xlabel('Date/Time')
-# ax.set_ylabel('Demand')
-
-# # Setting the plot title
-# ax.set_title('Hourly Toronto Electricity Demand vs. Predicted Demand')
-
-# # Adjusting the legend
-# ax.legend()
-
-# # Display the plot
-# plt.show()
-
-# print(f"Mean Absolute Percentage Error: {mape}%")
-
-
-# Plotting with Streamlit
-
-# # Add your title here
-# st.title('Hourly Toronto Electricity Demand Prediction')
+# Step 3: Select Dates, Plot Data and Calculate MAPE
 
 # Date range selection
 start_date, end_date = st.select_slider(
@@ -107,15 +83,6 @@ start_date, end_date = st.select_slider(
     options=pd.to_datetime(plot_data.index).date,
     value=(pd.to_datetime(plot_data.index).min().date(), pd.to_datetime(plot_data.index).max().date())
 )
-
-# # inject custom CSS for the slider
-# st.markdown("""
-# <style>
-#     .stSlider > div > div > div.css-1hwfws3 {
-#         background-color: yellow !important;
-#     }
-# </style>
-# """, unsafe_allow_html=True)
 
 # Filter data based on the selected date range
 plot_data_filtered = plot_data[(plot_data.index >= str(start_date)) & (plot_data.index <= str(end_date))]
@@ -132,8 +99,10 @@ ax.legend(fontsize=22)
 st.pyplot(fig)
 
 
-# # # write with Streamlit
-# st.write(f"Mean Absolute Percentage Error: {mape}%")
+# # write with Streamlit
+st.write(f"Mean Absolute Percentage Error: {mape}%")
+
+
 
 # # Filter the original and predicted dataframes based on selected date range
 # actual_filtered = y[(y.index >= str(start_date)) & (y.index <= str(end_date))]
