@@ -12,7 +12,7 @@ st.title('Hourly Toronto Electricity Demand Prediction')
 style = """
 <style>
     .stApp {
-        background-image: linear-gradient(to bottom, yellow, darkgreen, darkblue);
+        background-image: linear-gradient(to bottom, yellow, orange, black);
         color: #fff;
     }
 </style>
@@ -100,7 +100,7 @@ plot_data.columns = ['Demand', 'Predicted Demand']
 
 # Date range selection
 start_date, end_date = st.select_slider(
-    'Select a range of dates',
+    'SELECT DATE RANGE',
     options=pd.to_datetime(plot_data.index).date,
     value=(pd.to_datetime(plot_data.index).min().date(), pd.to_datetime(plot_data.index).max().date())
 )
