@@ -12,7 +12,7 @@ st.title('Hourly Toronto Electricity Demand Prediction')
 style = """
 <style>
     .stApp {
-        background-image: linear-gradient(to right, yellow, green, darkblue);
+        background-image: linear-gradient(to bottom, yellow, green, darkgreen, darkblue);
         color: #fff;
     }
 </style>
