@@ -79,8 +79,34 @@ plot_data.columns = ['Demand', 'Predicted Demand']
 
 
 # Plotting with Streamlit
+
+# Custom CSS
+st.markdown("""
+<style>
+body {
+    color: #fff;
+    background-color: #267;
+    background-image: linear-gradient(to right, yellow, green, darkblue);
+}
+</style>
+    """, unsafe_allow_html=True)
+
+# Add your title here
+st.title('Hourly Toronto Electricity Demand Prediction')
+
+# Date range selection
+start_date, end_date = st.select_slider(
+    'Select a range of dates',
+    options=pd.to_datetime(plot_data.index).date,
+    value=(pd.to_datetime(plot_data.index).min().date(), pd.to_datetime(plot_data.index).max().date())
+)
+
+# Filter data based on the selected date range
+plot_data_filtered = plot_data[(plot_data.index >= str(start_date)) & (plot_data.index <= str(end_date))]
+
 fig, ax = plt.subplots(figsize=(24, 6))
-plot_data.plot(ax=ax)
+# plot_data.plot(ax=ax)
+plot_data_filtered.plot(ax=ax)
 ax.set_xlabel('Date/Time')
 ax.set_ylabel('Demand')
 ax.set_title('Hourly Toronto Electricity Demand vs. Predicted Demand')
