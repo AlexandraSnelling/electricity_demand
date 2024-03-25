@@ -5,6 +5,17 @@ import matplotlib.pyplot as plt
 from joblib import load
 import streamlit as st
 
+# Custom CSS
+st.markdown("""
+<style>
+body {
+    color: #fff;
+    background-color: #267;
+    background-image: linear-gradient(to right, yellow, green, darkblue);
+}
+</style>
+    """, unsafe_allow_html=True)
+
 # My Application
 # Step 1: Prepare Data 
 
@@ -79,17 +90,6 @@ plot_data.columns = ['Demand', 'Predicted Demand']
 
 
 # Plotting with Streamlit
-
-# Custom CSS
-st.markdown("""
-<style>
-body {
-    color: #fff;
-    background-color: #267;
-    background-image: linear-gradient(to right, yellow, green, darkblue);
-}
-</style>
-    """, unsafe_allow_html=True)
 
 # Add your title here
 st.title('Hourly Toronto Electricity Demand Prediction')
