@@ -128,7 +128,7 @@ ax.set_xlabel('Date/Time')
 ax.set_ylabel('Demand')
 ax.set_title('Hourly Toronto Electricity Demand vs. Predicted Demand')
 ax.legend()
-st.pyplot(fig)
+st.pyplot()
 
 
 # # # write with Streamlit
