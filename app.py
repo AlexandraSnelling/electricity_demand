@@ -5,16 +5,20 @@ import matplotlib.pyplot as plt
 from joblib import load
 import streamlit as st
 
-# Custom CSS
-st.markdown("""
+# Title of your app
+st.title('Hourly Toronto Electricity Demand Prediction')
+
+# Inject custom CSS with the <style> tag
+style = """
 <style>
-body {
-    color: #fff;
-    background-color: #267;
-    background-image: linear-gradient(to right, yellow, green, darkblue);
-}
+    .stApp {
+        background-image: linear-gradient(to right, yellow, green, darkblue);
+        color: #fff;
+    }
 </style>
-    """, unsafe_allow_html=True)
+"""
+
+st.markdown(style, unsafe_allow_html=True)
 
 # My Application
 # Step 1: Prepare Data 
