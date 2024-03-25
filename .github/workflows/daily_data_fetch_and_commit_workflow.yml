@@ -1,9 +1,9 @@
 name: Daily Data Fetch and Commit Workflow
 
 on:
-  schedule:
-    - cron: '55 23 * * *' # Runs at 11:30 PM UTC
-  workflow_dispatch:  # This line enables manual triggering of the workflow
+  schedule:  # enable scheduled triggering of workflow
+    - cron: '30 16 * * *' # Runs at 4:30 PM UTC (8:30 AM Toronto)
+  workflow_dispatch:  # enable manual triggering of workflow
 
 jobs:
   fetch_and_process_data:
@@ -21,14 +21,6 @@ jobs:
     - name: Install dependencies
       run: |
         pip install pandas requests scikit-learn holidays
-
-    - name: List directory contents
-      run: ls -l
-
-    - name: Print TEST Secret
-      env:
-        TEST: ${{ secrets.TEST }}
-      run: echo "TEST secret is $TEST"
 
     - name: Fetch and Save Data
       env:
