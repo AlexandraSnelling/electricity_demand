@@ -37,8 +37,8 @@ jobs:
 
     - name: Commit and Push changes
       run: |
-        git config --global user.name 'github-actions'
-        git config --global user.email 'github-actions@github.com'
-        git add -f data/test_data_2024.csv
-        git commit -m "Auto-update data" || echo "No changes to commit"
+        git config user.name 'github-actions'
+        git config user.email 'github-actions@github.com'
+        git add data/test_data_2024.csv
+        git commit -m "Auto-update data" -a || echo "No changes to commit"
         git push
