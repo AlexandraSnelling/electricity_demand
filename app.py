@@ -22,9 +22,24 @@ custom_css = """
             background-color: #000000 !important;
         }
         
+        /* Change the color of the text in the toolbar to white */
+        [data-testid="stToolbarActions"] button,
+        [data-testid="stToolbarActions"] svg,
+        [data-testid="stActionButtonLabel"] {
+            color: white !important;
+            fill: white !important;
+        }
+        
         /* Change the color of the text and icons inside the action buttons to white */
         [data-testid="stActionButton"] button,
         [data-testid="stActionButton"] svg {
+            color: white !important;
+            fill: white !important;
+        }
+        
+        /* Change color of dropdown menu icon */
+        [data-testid="stMainMenu"] button,
+        [data-testid="stMainMenu"] svg {
             color: white !important;
             fill: white !important;
         }
