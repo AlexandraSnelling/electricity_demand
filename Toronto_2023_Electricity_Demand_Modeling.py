@@ -26,21 +26,43 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
     
     st.write(forecast_data_2023.columns)
     
-    # ensure 'ds' is datetime type in all DataFrames
-    forecast_data_2023['ds'] = pd.to_datetime(forecast_data_2023['ds'])
+    # # ensure 'ds' is datetime type in all DataFrames
+    # forecast_data_2023['ds'] = pd.to_datetime(forecast_data_2023['ds'])
 
     # # Streamlit application start
     # st.title('Electricity Demand Forecast Visualization')
 
-    # Step 1: Widget for date range selection
-    st.subheader('Select Date Range')
+    # Convert 'ds' to datetime just in case it's not in the right format
+    forecast_data_2023['ds'] = pd.to_datetime(forecast_data_2023['ds'])
+
+    # Calculate min and max dates for the slider
+    min_date = forecast_data_2023['ds'].min()
+    max_date = forecast_data_2023['ds'].max()
+
+    # Safety check: If there's any NaT or NaN values after conversion, slider will throw an error.
+    if pd.isnull(min_date) or pd.isnull(max_date):
+        st.error('Date range is invalid. Please check your "ds" column for NaN or NaT values.')
+        st.stop()
+
+    # Assuming min_date and max_date are valid, set up the slider
     start_date, end_date = st.slider(
         'Date range:',
-        min_value=forecast_data_2023['ds'].min(),
-        max_value=forecast_data_2023['ds'].max(),
-        value=(forecast_data_2023['ds'].min(), forecast_data_2023['ds'].max()),
+        min_value=min_date.to_pydatetime(),  # Convert to Python datetime just in case
+        max_value=max_date.to_pydatetime(),  # Convert to Python datetime just in case
+        value=(min_date.to_pydatetime(), max_date.to_pydatetime()),  # Ensure both are the same type
         format='MM/DD/YYYY'
     )
+
+    
+    # # Step 1: Widget for date range selection
+    # st.subheader('Select Date Range')
+    # start_date, end_date = st.slider(
+    #     'Date range:',
+    #     min_value=forecast_data_2023['ds'].min(),
+    #     max_value=forecast_data_2023['ds'].max(),
+    #     value=(forecast_data_2023['ds'].min(), forecast_data_2023['ds'].max()),
+    #     format='MM/DD/YYYY'
+    # )
 
     # Widget for selecting which predictions to display
     prediction_options = st.multiselect(
