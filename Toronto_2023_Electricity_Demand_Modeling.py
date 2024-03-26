@@ -24,6 +24,8 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
     # load .csv files for 2023 forecast data to dataframe
     forecast_data_2023 = pd.read_csv('data/forecast_data_2023.csv')
     
+    st.write(forecast_data_2023.columns)
+    
     # ensure 'ds' is datetime type in all DataFrames
     forecast_data_2023['ds'] = pd.to_datetime(forecast_data_2023['ds'])
 
