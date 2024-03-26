@@ -101,7 +101,7 @@ if st.session_state['current_page'] == 'Home':
             
             /* Adjust the top margin of the main block container */
             .main .block-container {
-                margin-top: -50px; /* Adjust this value as needed */
+                margin-top: -1000px; /* Adjust this value as needed */
             }
 
             /* If the above doesn't work as intended, you can try directly adjusting the iframe container */
