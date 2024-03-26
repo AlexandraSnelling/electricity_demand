@@ -98,6 +98,16 @@ if st.session_state['current_page'] == 'Home':
                 background-color: black !important;
                 color: white !important; /* Change text color if needed */
             }
+            
+            /* Adjust the top margin of the main block container */
+            .main .block-container {
+                margin-top: -50px; /* Adjust this value as needed */
+            }
+
+            /* If the above doesn't work as intended, you can try directly adjusting the iframe container */
+            .iframe-container {
+                margin-top: -50px; /* Adjust this value as needed */
+            }
 
             /* Make iframe responsive */
             .iframe-container {
