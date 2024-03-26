@@ -7,9 +7,6 @@ import streamlit as st
 
 def show_Toronto_2024_Electricity_Demand_Forecast():
     # st.title("Forecast Page")
-    
-    # set the page to wide mode
-    st.set_page_config(layout="wide")
 
     # Title of your app
     st.title('2024 Hourly Electricity Demand: Toronto Ontario')
