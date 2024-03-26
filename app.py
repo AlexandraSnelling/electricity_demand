@@ -111,7 +111,7 @@ if st.session_state['current_page'] == 'Home':
                 }
 
                 .iframe-container {
-                    margin-top: -100px; /* Adjust this value for desktop as needed */
+                    margin-top: -150px; /* Adjust this value for desktop as needed */
                 }
             }
 
