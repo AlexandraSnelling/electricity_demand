@@ -22,6 +22,13 @@ custom_css = """
             background-color: #000000 !important;
         }
         
+        /* Change the color of the text and icons inside the action buttons to white */
+        [data-testid="stActionButton"] button,
+        [data-testid="stActionButton"] svg {
+            color: white !important;
+            fill: white !important;
+        }
+        
         /* Main sidebar style */
         [data-testid="stSidebarContent"] {
             background-color: #000000 !important;
