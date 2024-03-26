@@ -98,6 +98,22 @@ if st.session_state['current_page'] == 'Home':
                 background-color: black !important;
                 color: white !important; /* Change text color if needed */
             }
+            
+            /* Default style for mobile and smaller screens */
+            .iframe-container {
+                margin-top: 0px; /* No negative margin for mobile by default */
+            }
+
+            /* Media query for larger screens - typically desktop */
+            @media (min-width: 992px) { /* Adjust this breakpoint as needed */
+                .main .block-container {
+                    margin-top: -50px; /* Adjust this value for desktop as needed */
+                }
+
+                .iframe-container {
+                    margin-top: -50px; /* Adjust this value for desktop as needed */
+                }
+            }
 
             /* Make iframe responsive */
             .iframe-container {
