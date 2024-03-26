@@ -5,8 +5,32 @@ from Toronto_2023_Electricity_Demand_Modeling import show_Toronto_2023_Electrici
 # Set the page config here, as the very first Streamlit call
 st.set_page_config(layout="wide", page_title="Electricity Demand Forecast")
 
+# Custom CSS to inject into the Streamlit page
+st.markdown(
+    """
+    <style>
+    /* This creates a black sidebar with white text */
+    .css-1d391kg {
+        background-color: #000000;
+        color: #ffffff;
+    }
+    /* This changes the color of the text and the buttons in the sidebar */
+    .css-hi6a2p {
+        color: #ffffff;
+    }
+    .st-ae {
+        color: #ffffff;
+    }
+    .st-ae:hover {
+        color: #ffffff;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # Page selection
-page = st.sidebar.selectbox("Choose a page", ["Home", "Forecast", "Modeling"])
+page = st.sidebar.radio("Navigate", ["Home", "Forecast", "Modeling"])
 
 if page == "Home":
     st.title("This is your home page.")
