@@ -1,4 +1,7 @@
 import streamlit as st
+from streamlit.components.v1 import components  # Add this line to import components
+from Toronto_2024_Electricity_Demand_Forecast import show_Toronto_2024_Electricity_Demand_Forecast
+from Toronto_2023_Electricity_Demand_Modeling import show_Toronto_2023_Electricity_Demand_Modeling
 
 # Set page config
 st.set_page_config(layout="wide", page_title="Electricity Demand Forecast")
