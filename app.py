@@ -14,41 +14,77 @@ if 'current_page' not in st.session_state:
 def navigate(page):
     st.session_state['current_page'] = page
 
-# Custom CSS to style the sidebar buttons
 custom_css = """
     <style>
-        .sidebar .sidebar-content {
-            background-color: #2e2e2e;
+        /* Main sidebar style */
+        .css-1e5imcs {
+            background-color: #000000 !important;
         }
-        .css-1aumxhk {
-            background-color: #2e2e2e;
-            color: white;
-            padding: 10px;
+
+        /* Ensure the sidebar text color is white */
+        .css-1e5imcs, .css-1e5imcs a {
+            color: white !important;
         }
-        .stButton>button {
+
+        /* Style the buttons to look more like tabs */
+        .stButton > button {
             display: block;
             width: 100%;
+            padding: 10px;
+            text-align: left;
             border: none;
             border-radius: 0;
             margin: 0;
-            padding: 10px;
-            text-align: left;
             color: white;
-            background-color: #2e2e2e;
+            background-color: #000000;
             font-size: 16px;
         }
-        .stButton>button:hover {
-            background-color: #444;
+        .stButton > button:hover {
+            background-color: #555555;
         }
-        .stButton>button:focus {
+        .stButton > button:focus {
             outline: none;
             box-shadow: none;
         }
-        .stButton>button:active {
-            background-color: #666;
-        }
     </style>
 """
+    
+    
+# # Custom CSS to style the sidebar buttons
+# custom_css = """
+#     <style>
+#         .sidebar .sidebar-content {
+#             background-color: #2e2e2e;
+#         }
+#         .css-1aumxhk {
+#             background-color: #2e2e2e;
+#             color: white;
+#             padding: 10px;
+#         }
+#         .stButton>button {
+#             display: block;
+#             width: 100%;
+#             border: none;
+#             border-radius: 0;
+#             margin: 0;
+#             padding: 10px;
+#             text-align: left;
+#             color: white;
+#             background-color: #2e2e2e;
+#             font-size: 16px;
+#         }
+#         .stButton>button:hover {
+#             background-color: #444;
+#         }
+#         .stButton>button:focus {
+#             outline: none;
+#             box-shadow: none;
+#         }
+#         .stButton>button:active {
+#             background-color: #666;
+#         }
+#     </style>
+# """
 
 st.markdown(custom_css, unsafe_allow_html=True)
 
