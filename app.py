@@ -14,3 +14,5 @@ elif page == "Forecast":
     show_Toronto_2024_Electricity_Demand_Forecast()
 elif page == "Modeling":
     show_Toronto_2023_Electricity_Demand_Modeling()
+    
+components.iframe("https://docs.google.com/presentation/d/e/2PACX-1vRbaUc-_mCv8y5FlWOnOfxNjGEqej_AaXMBgHDYRyQ2A_3AZ2DSxG_1XKzZQqaU8FG9ptALM0ic3KmK/embed?start=true&loop=true&delayms=3000", height=569)
