@@ -23,14 +23,6 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
 
     # load .csv files for 2023 forecast data to dataframe
     forecast_data_2023 = pd.read_csv('data/forecast_data_2023.csv')
-    
-    st.write(forecast_data_2023.columns)
-    
-    # # ensure 'ds' is datetime type in all DataFrames
-    # forecast_data_2023['ds'] = pd.to_datetime(forecast_data_2023['ds'])
-
-    # # Streamlit application start
-    # st.title('Electricity Demand Forecast Visualization')
 
     # Convert 'ds' to datetime just in case it's not in the right format
     forecast_data_2023['ds'] = pd.to_datetime(forecast_data_2023['ds'])
@@ -44,7 +36,7 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
         st.error('Date range is invalid. Please check your "ds" column for NaN or NaT values.')
         st.stop()
 
-    # Assuming min_date and max_date are valid, set up the slider
+    # Step 1: Widget for date range selection
     start_date, end_date = st.slider(
         'Date range:',
         min_value=min_date.to_pydatetime(),  # Convert to Python datetime just in case
@@ -52,17 +44,6 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
         value=(min_date.to_pydatetime(), max_date.to_pydatetime()),  # Ensure both are the same type
         format='MM/DD/YYYY'
     )
-
-    
-    # # Step 1: Widget for date range selection
-    # st.subheader('Select Date Range')
-    # start_date, end_date = st.slider(
-    #     'Date range:',
-    #     min_value=forecast_data_2023['ds'].min(),
-    #     max_value=forecast_data_2023['ds'].max(),
-    #     value=(forecast_data_2023['ds'].min(), forecast_data_2023['ds'].max()),
-    #     format='MM/DD/YYYY'
-    # )
 
     # Widget for selecting which predictions to display
     prediction_options = st.multiselect(
@@ -75,9 +56,9 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
     filtered_data = forecast_data_2023[(forecast_data_2023['ds'] >= start_date) & (forecast_data_2023['ds'] <= end_date)]
 
     # Plotting
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(34, 12))
     ax.plot(filtered_data['ds'], filtered_data['y'], label='Actual Demand')
-
+   
     # Dynamically add selected prediction lines
     if 'y_pred_lstm' in prediction_options:
         ax.plot(filtered_data['ds'], filtered_data['y_pred_lstm'], label='LSTM Predictions')
@@ -88,6 +69,8 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
 
     ax.set_xlabel('Date/Time')
     ax.set_ylabel('Demand')
+    plt.xticks(rotation=45, ha='right', fontsize=10)  # Rotate labels and set font size
+    plt.tight_layout()  # This will make sure the labels and title fit into the figure area
     ax.legend()
     st.pyplot(fig)
 
