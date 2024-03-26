@@ -88,24 +88,59 @@ st.sidebar.button("🔮 Forecast", on_click=navigate, args=('Forecast',))
 st.sidebar.button("📊 Modeling", on_click=navigate, args=('Modeling',))
 
 # Page display logic
+# Page display logic
 if st.session_state['current_page'] == 'Home':
-    # apply style to home page
+    # Only apply this style on the home page
     home_style = """
         <style>
-            /* Target the main content area of Streamlit for the homepage */
-            .main .block-container {
-                background-color: black !important;
-                color: white !important; /* Change text color if needed */
+            /* Other styles... */
+
+            /* Make iframe responsive */
+            .iframe-container {
+                position: relative;
+                padding-bottom: 56.25%; /* Aspect ratio */
+                height: 0;
+                overflow: hidden;
+            }
+            .iframe-container iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: 0;
             }
         </style>
     """
     st.markdown(home_style, unsafe_allow_html=True)
+
+    # Remove st.title if you're not using it
     # st.title("This is your home page.")
-    # components.iframe("https://docs.google.com/presentation/d/e/2PACX-1vRbaUc-_mCv8y5FlWOnOfxNjGEqej_AaXMBgHDYRyQ2A_3AZ2DSxG_1XKzZQqaU8FG9ptALM0ic3KmK/embed?start=true&loop=true&delayms=3000", height=569)
-    # Use st.markdown to embed the Google Slides iframe
+
+    # Responsive iframe for Google Slides
     st.markdown("""
-    <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRbaUc-_mCv8y5FlWOnOfxNjGEqej_AaXMBgHDYRyQ2A_3AZ2DSxG_1XKzZQqaU8FG9ptALM0ic3KmK/embed?start=false&loop=false&delayms=15000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+    <div class="iframe-container">
+        <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRbaUc-_mCv8y5FlWOnOfxNjGEqej_AaXMBgHDYRyQ2A_3AZ2DSxG_1XKzZQqaU8FG9ptALM0ic3KmK/embed?start=false&loop=false&delayms=15000" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+    </div>
     """, unsafe_allow_html=True)
+# if st.session_state['current_page'] == 'Home':
+#     # apply style to home page
+#     home_style = """
+#         <style>
+#             /* Target the main content area of Streamlit for the homepage */
+#             .main .block-container {
+#                 background-color: black !important;
+#                 color: white !important; /* Change text color if needed */
+#             }
+#         </style>
+#     """
+#     st.markdown(home_style, unsafe_allow_html=True)
+#     # st.title("This is your home page.")
+#     # components.iframe("https://docs.google.com/presentation/d/e/2PACX-1vRbaUc-_mCv8y5FlWOnOfxNjGEqej_AaXMBgHDYRyQ2A_3AZ2DSxG_1XKzZQqaU8FG9ptALM0ic3KmK/embed?start=true&loop=true&delayms=3000", height=569)
+#     # Use st.markdown to embed the Google Slides iframe
+#     st.markdown("""
+#     <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRbaUc-_mCv8y5FlWOnOfxNjGEqej_AaXMBgHDYRyQ2A_3AZ2DSxG_1XKzZQqaU8FG9ptALM0ic3KmK/embed?start=false&loop=false&delayms=15000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+#     """, unsafe_allow_html=True)
 elif st.session_state['current_page'] == 'Forecast':
     show_Toronto_2024_Electricity_Demand_Forecast()  # function that shows the forecast page
 elif st.session_state['current_page'] == 'Modeling':
