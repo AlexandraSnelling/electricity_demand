@@ -17,6 +17,11 @@ def navigate(page):
 # Custom CSS to style the sidebar buttons and background
 custom_css = """
     <style>
+        /* Change the color of the top bar */
+        [data-testid="stHeader"] {
+            background-color: #000000 !important;
+        }
+        
         /* Main sidebar style */
         [data-testid="stSidebarContent"] {
             background-color: #000000 !important;
