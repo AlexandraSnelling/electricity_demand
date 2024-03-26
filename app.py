@@ -60,7 +60,11 @@ st.sidebar.button("📊 Modeling", on_click=navigate, args=('Modeling',))
 # Page display logic
 if st.session_state['current_page'] == 'Home':
     st.title("This is your home page.")
-    components.iframe("https://docs.google.com/presentation/d/e/2PACX-1vRbaUc-_mCv8y5FlWOnOfxNjGEqej_AaXMBgHDYRyQ2A_3AZ2DSxG_1XKzZQqaU8FG9ptALM0ic3KmK/embed?start=true&loop=true&delayms=3000", height=569)
+    # components.iframe("https://docs.google.com/presentation/d/e/2PACX-1vRbaUc-_mCv8y5FlWOnOfxNjGEqej_AaXMBgHDYRyQ2A_3AZ2DSxG_1XKzZQqaU8FG9ptALM0ic3KmK/embed?start=true&loop=true&delayms=3000", height=569)
+    # Use st.markdown to embed the Google Slides iframe
+    st.markdown("""
+    <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRbaUc-_mCv8y5FlWOnOfxNjGEqej_AaXMBgHDYRyQ2A_3AZ2DSxG_1XKzZQqaU8FG9ptALM0ic3KmK/embed?start=false&loop=false&delayms=15000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+    """, unsafe_allow_html=True)
 elif st.session_state['current_page'] == 'Forecast':
     show_Toronto_2024_Electricity_Demand_Forecast()  # function that shows the forecast page
 elif st.session_state['current_page'] == 'Modeling':
