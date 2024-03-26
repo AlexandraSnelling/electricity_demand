@@ -89,6 +89,17 @@ st.sidebar.button("📊 Modeling", on_click=navigate, args=('Modeling',))
 
 # Page display logic
 if st.session_state['current_page'] == 'Home':
+    # apply style to home page
+    home_style = """
+        <style>
+            /* Target the main content area of Streamlit for the homepage */
+            .main .block-container {
+                background-color: black !important;
+                color: white !important; /* Change text color if needed */
+            }
+        </style>
+    """
+    st.markdown(home_style, unsafe_allow_html=True)
     st.title("This is your home page.")
     # components.iframe("https://docs.google.com/presentation/d/e/2PACX-1vRbaUc-_mCv8y5FlWOnOfxNjGEqej_AaXMBgHDYRyQ2A_3AZ2DSxG_1XKzZQqaU8FG9ptALM0ic3KmK/embed?start=true&loop=true&delayms=3000", height=569)
     # Use st.markdown to embed the Google Slides iframe
