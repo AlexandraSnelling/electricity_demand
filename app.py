@@ -29,17 +29,25 @@ custom_css = """
             color: white !important;
             fill: white !important;
         }
-        
+
         /* Change the color of the text and icons inside the action buttons to white */
-        [data-testid="stActionButtonIcon"] button,
+        [data-testid="stActionButton"] button,
+        [data-testid="stActionButton"] svg,
         [data-testid="stActionButtonIcon"] svg {
             color: white !important;
             fill: white !important;
         }
-        
+
         /* Change color of dropdown menu icon */
         [data-testid="stMainMenu"] button,
         [data-testid="stMainMenu"] svg {
+            color: white !important;
+            fill: white !important;
+        }
+
+        /* Additional styling to ensure SVG icons are white */
+        [data-testid="baseButton-header"] svg,
+        [data-testid="stActionButtonIcon"] {
             color: white !important;
             fill: white !important;
         }
