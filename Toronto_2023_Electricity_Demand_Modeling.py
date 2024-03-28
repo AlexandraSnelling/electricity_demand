@@ -43,6 +43,10 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
         max_abs_error = max_error_metric(y_true, y_pred)
         return r2, mape, mean_abs_error, max_abs_error
     
+    def format_metrics(metrics):
+        # Format each metric as a string to avoid trailing zeros
+        return {k: f"{v:.2f}" for k, v in metrics.items()}
+
     def show_evaluation_table(forecast_data):
         # Calculate metrics for each model and populate the dictionary
         model_metrics = {
@@ -63,29 +67,82 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
             model_metrics['Mean Absolute Error (MW)'].append(mean_abs_error)
             model_metrics['Maximum Absolute Error (MW)'].append(max_abs_error)
 
-        # Convert the dictionary to a DataFrame, round and display using Streamlit
-        metrics_df = pd.DataFrame(model_metrics).round(2)
-        
+        # Format the metrics to avoid trailing zeros and round them off to two decimal places
+        model_metrics_formatted = {model: format_metrics(metrics) for model, metrics in model_metrics.items()}
+
+        # Convert the dictionary to a DataFrame
+        metrics_df = pd.DataFrame(model_metrics_formatted).T  # Transpose to get models as rows
+
         # Apply custom CSS to style the table with a white background, black border, and black text
         st.markdown("""
-        <style>
-            table {
-                color: black !important;
-                background-color: white !important;
-            }
-            th {
-                color: black !important;
-                background-color: white !important;
-            }
-            td {
-                color: black !important;
-                background-color: white !important;
-                border: 1px solid black !important;
-            }
-        </style>
-        """, unsafe_allow_html=True)
-        
+            <style>
+                table {
+                    color: black !important;
+                    background-color: white !important;
+                }
+                th {
+                    color: black !important;
+                    background-color: white !important;
+                    border: 1px solid black !important;
+                }
+                td {
+                    color: black !important;
+                    background-color: white !important;
+                    border: 1px solid black !important;
+                }
+                .dataframe {
+                    border-collapse: collapse !important;
+                }
+            </style>
+            """, unsafe_allow_html=True)
+
+        # Display the DataFrame as a table
         st.table(metrics_df)
+    
+    
+#     def show_evaluation_table(forecast_data):
+#         # Calculate metrics for each model and populate the dictionary
+#         model_metrics = {
+#             'Model': ['LSTM', 'Prophet', 'XGB'],
+#             'R2': [],
+#             'Mean Absolute % Error': [],
+#             'Mean Absolute Error (MW)': [],
+#             'Maximum Absolute Error (MW)': []
+#         }
+
+#         for model in model_metrics['Model']:
+#             y_true = forecast_data['y']
+#             y_pred = forecast_data[f'y_pred_{model.lower()}']
+#             r2, mape, mean_abs_error, max_abs_error = calculate_metrics(y_true, y_pred)
+
+#             model_metrics['R2'].append(r2)
+#             model_metrics['Mean Absolute % Error'].append(mape)
+#             model_metrics['Mean Absolute Error (MW)'].append(mean_abs_error)
+#             model_metrics['Maximum Absolute Error (MW)'].append(max_abs_error)
+
+#         # Convert the dictionary to a DataFrame, round and display using Streamlit
+#         metrics_df = pd.DataFrame(model_metrics).round(2)
+        
+#         # Apply custom CSS to style the table with a white background, black border, and black text
+#         st.markdown("""
+#         <style>
+#             table {
+#                 color: black !important;
+#                 background-color: white !important;
+#             }
+#             th {
+#                 color: black !important;
+#                 background-color: white !important;
+#             }
+#             td {
+#                 color: black !important;
+#                 background-color: white !important;
+#                 border: 1px solid black !important;
+#             }
+#         </style>
+#         """, unsafe_allow_html=True)
+        
+#         st.table(metrics_df)
 
     # Place this function call where you want the evaluation table to be displayed in your app
     show_evaluation_table(forecast_data_2023)
