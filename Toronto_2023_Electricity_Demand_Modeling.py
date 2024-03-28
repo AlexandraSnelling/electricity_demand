@@ -10,7 +10,7 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
 
     # Title of your app
     st.title('Model Evaluation:')
-    st.title('Actual vs Forecast Demand for 2023 Toronto Electricity')
+    st.title('Actual vs Forecast Demand 2023 Toronto Electricity')
 
     # Inject custom CSS with the <style> tag
     style = """
@@ -37,10 +37,10 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
     #     return r2, mape, mean_abs_error, max_abs_error
     
     def calculate_metrics(y_true, y_pred):
-        r2 = round(r2_score(y_true, y_pred), 2)
-        mape = round(np.mean(np.abs((y_true - y_pred) / y_true)) * 100, 2)
-        mean_abs_error = round(mean_absolute_error(y_true, y_pred), 2)
-        max_abs_error = round(max_error_metric(y_true, y_pred), 2)
+        r2 = r2_score(y_true, y_pred)
+        mape = np.mean(np.abs((y_true - y_pred) / y_true)) * 100
+        mean_abs_error = mean_absolute_error(y_true, y_pred)
+        max_abs_error = max_error_metric(y_true, y_pred)
         return r2, mape, mean_abs_error, max_abs_error
     
     def show_evaluation_table(forecast_data):
@@ -63,29 +63,25 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
             model_metrics['Mean Absolute Error (MW)'].append(mean_abs_error)
             model_metrics['Maximum Absolute Error (MW)'].append(max_abs_error)
 
-        # Convert the dictionary to a DataFrame and display using Streamlit
-        metrics_df = pd.DataFrame(model_metrics)
+        # Convert the dictionary to a DataFrame, round and display using Streamlit
+        metrics_df = pd.DataFrame(model_metrics).round(2)
         
         # Apply custom CSS to style the table with a white background, black border, and black text
         st.markdown("""
         <style>
-        .stTable {
-            background-color: white;
-            color: black;
-        }
-        .st-df { 
-            border-collapse: collapse;
-        }
-        .st-df th {
-            background-color: white;
-            color: black;
-            border: 1px solid black;
-        }
-        .st-df td {
-            background-color: white;
-            color: black;
-            border: 1px solid black;
-        }
+            table {
+                color: black !important;
+                background-color: white !important;
+            }
+            th {
+                color: black !important;
+                background-color: white !important;
+            }
+            td {
+                color: black !important;
+                background-color: white !important;
+                border: 1px solid black !important;
+            }
         </style>
         """, unsafe_allow_html=True)
         
@@ -143,14 +139,16 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
     st.pyplot(fig)
 
     # MAPE and Max Absolute Percentage Error Calculation & Display
+    
     for option in prediction_options:
         y_true = filtered_data['y']
         y_pred = filtered_data[option]
 
         # Calculate MAPE
         mape_floating = np.mean(np.abs((y_true - y_pred) / y_true)) * 100
+        
         # Calculate Max Absolute Percentage Error
-        max_error_floating = np.max(np.abs((y_true - y_pred) / y_true)) * 100
+        # max_error_floating = np.max(np.abs((y_true - y_pred) / y_true)) * 100
 
         st.write(f"MAPE for {option}: {mape_floating:.2f}%")
         # st.write(f"Max Absolute Percentage Error for {option}: {max_error_floating:.2f}%")     
