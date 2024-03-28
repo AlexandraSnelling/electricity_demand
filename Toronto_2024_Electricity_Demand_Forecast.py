@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from joblib import load
 import streamlit as st
 from sklearn.metrics import max_error
+from datetime import datetime
 
 def show_Toronto_2024_Electricity_Demand_Forecast():
     # st.title("Forecast Page")
@@ -105,28 +106,23 @@ def show_Toronto_2024_Electricity_Demand_Forecast():
     plt.tight_layout() 
     ax.legend(fontsize=22)
     st.pyplot(fig)
-
-
-    #     ax.set_xlabel('Date/Time', fontsize=20)
-    # ax.set_ylabel('Demand (MW)', fontsize=20)
-    # plt.xticks(rotation=45, ha='right', fontsize=18)  # Rotate labels and set font size
-    # ax.tick_params(axis='y', labelsize=18)
-    # ax.set_title('2023 Hourly Toronto Electricity Forecast vs. Actual Demand', fontsize=24)
-    # plt.tight_layout()  # This will make sure the labels and title fit into the figure area
-    # ax.legend(fontsize=22)
-    # st.pyplot(fig)
     
     # # write with Streamlit
     st.write(f"XGBoost Model Mean Absolute Percentage Error (2024): {mape}%")
     st.write(f"XGBoost Model Maximum Absolute Error (2024): {max_absolute_error} (MW)")
 
+    # First, filter the 'test_data_predictions' DataFrame for today or future dates.
+    today = pd.Timestamp(datetime.now().date())  # Get today's date
+    future_data = test_data_predictions[test_data_predictions['ds'] >= today]
 
-    # # Filter the original and predicted dataframes based on selected date range
-    # actual_filtered = y[(y.index >= str(start_date)) & (y.index <= str(end_date))]
-    # predictions_filtered = y_predict[(y_predict.index >= str(start_date)) & (y_predict.index <= str(end_date))]
+    # Then, create a new DataFrame with formatted columns to match the desired table structure.
+    table_to_display = future_data.copy()
+    table_to_display['Date'] = table_to_display['ds'].dt.date
+    table_to_display['Time'] = table_to_display['ds'].dt.time
+    table_to_display = table_to_display[['Date', 'Time', 'y_predictions_xgb']]
 
-    # # Recalculate MAPE with filtered data
-    # mape_filtered = round((abs((actual_filtered - predictions_filtered) / actual_filtered).mean()) * 100, 2)
+    # Rename the 'y_predictions_xgb' column to 'XGBoost Forecast Demand' for display.
+    table_to_display.rename(columns={'y_predictions_xgb': 'XGBoost Forecast Demand (MW)'}, inplace=True)
 
-    # # Display the updated MAPE
-    # st.write(f"Filtered Mean Absolute Percentage Error: {mape_filtered}%")
+    # Now, display this table in the Streamlit app.
+    st.table(table_to_display)
