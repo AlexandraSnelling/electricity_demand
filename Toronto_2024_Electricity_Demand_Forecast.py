@@ -109,7 +109,7 @@ def show_Toronto_2024_Electricity_Demand_Forecast():
     
     # # write with Streamlit
     st.write(f"XGBoost Model Mean Absolute Percentage Error (2024): {mape}%")
-    st.write(f"XGBoost Model Maximum Absolute Error (2024): {max_absolute_error} (MW)")
+    # st.write(f"XGBoost Model Maximum Absolute Error (2024): {max_absolute_error} (MW)")
 
 
     # Convert the 'ds' column to datetime if it's not already
