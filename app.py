@@ -1,5 +1,6 @@
 import streamlit as st
 from streamlit.components.v1 import components  # Add this line to import components
+from LHL_Demo_Day_Slideshow import show_LHL_Demo_Day_Slideshow
 from Toronto_2024_Electricity_Demand_Forecast import show_Toronto_2024_Electricity_Demand_Forecast
 from Toronto_2023_Electricity_Demand_Modeling import show_Toronto_2023_Electricity_Demand_Modeling
 
@@ -82,10 +83,16 @@ custom_css = """
 
 st.markdown(custom_css, unsafe_allow_html=True)
 
+# # Sidebar navigation
+# st.sidebar.button("🏠 Home", on_click=navigate, args=('Home',))
+# st.sidebar.button("🔮 Forecast", on_click=navigate, args=('Forecast',))
+# st.sidebar.button("📊 Modeling", on_click=navigate, args=('Modeling',))
+
 # Sidebar navigation
-st.sidebar.button("🏠 Home", on_click=navigate, args=('Home',))
-st.sidebar.button("🔮 Forecast", on_click=navigate, args=('Forecast',))
-st.sidebar.button("📊 Modeling", on_click=navigate, args=('Modeling',))
+st.sidebar.button("Home", on_click=navigate, args=('Home',))
+st.sidebar.button("LHL Demo Day", on_click=navigate, args=('LHL Demo Day',))
+st.sidebar.button("Forecast", on_click=navigate, args=('Forecast',))
+st.sidebar.button("Modeling", on_click=navigate, args=('Modeling',))
 
 # Page display logic
 # Page display logic
@@ -143,24 +150,9 @@ if st.session_state['current_page'] == 'Home':
         <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRbaUc-_mCv8y5FlWOnOfxNjGEqej_AaXMBgHDYRyQ2A_3AZ2DSxG_1XKzZQqaU8FG9ptALM0ic3KmK/embed?start=false&loop=false&delayms=15000" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
     </div>
     """, unsafe_allow_html=True)
-# if st.session_state['current_page'] == 'Home':
-    # # apply style to home page
-    # home_style = """
-    #     <style>
-    #         /* Target the main content area of Streamlit for the homepage */
-    #         .main .block-container {
-    #             background-color: black !important;
-    #             color: white !important; /* Change text color if needed */
-    #         }
-    #     </style>
-    # """
-#     st.markdown(home_style, unsafe_allow_html=True)
-#     # st.title("This is your home page.")
-#     # components.iframe("https://docs.google.com/presentation/d/e/2PACX-1vRbaUc-_mCv8y5FlWOnOfxNjGEqej_AaXMBgHDYRyQ2A_3AZ2DSxG_1XKzZQqaU8FG9ptALM0ic3KmK/embed?start=true&loop=true&delayms=3000", height=569)
-#     # Use st.markdown to embed the Google Slides iframe
-#     st.markdown("""
-#     <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRbaUc-_mCv8y5FlWOnOfxNjGEqej_AaXMBgHDYRyQ2A_3AZ2DSxG_1XKzZQqaU8FG9ptALM0ic3KmK/embed?start=false&loop=false&delayms=15000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-#     """, unsafe_allow_html=True)
+
+elif st.session_state['current_page'] == 'LHL Demo Day':
+    show_LHL_Demo_Day_Slideshow()  # function that shows the demo day page
 elif st.session_state['current_page'] == 'Forecast':
     show_Toronto_2024_Electricity_Demand_Forecast()  # function that shows the forecast page
 elif st.session_state['current_page'] == 'Modeling':
