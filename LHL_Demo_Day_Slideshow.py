@@ -59,6 +59,6 @@ def show_LHL_Demo_Day_Slideshow():
     # Responsive iframe for Google Slides
     st.markdown("""
     <div class="iframe-container">
-        <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRbaUc-_mCv8y5FlWOnOfxNjGEqej_AaXMBgHDYRyQ2A_3AZ2DSxG_1XKzZQqaU8FG9ptALM0ic3KmK/embed?start=false&loop=false&delayms=15000" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+        <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRZ83BuUqEYsijmjhPXhdySUmgwsvU66uuZ35aYxXDCYstsL5TPrUhs0NhjDyc-OEWTE0Zd55Uv3iP0/embed?start=false&loop=false&delayms=15000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
     </div>
     """, unsafe_allow_html=True)
