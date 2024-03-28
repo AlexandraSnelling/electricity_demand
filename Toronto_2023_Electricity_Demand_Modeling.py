@@ -78,7 +78,8 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
             """, unsafe_allow_html=True)
 
         # Display the DataFrame as a table
-        st.table(metrics_df.iloc[:, 1:])
+        # st.table(metrics_df.iloc[:, :])
+        st.table(metrics_df.reset_index(drop=True))
 
     # Call the function to display the evaluation table
     show_evaluation_table(forecast_data_2023)
