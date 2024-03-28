@@ -111,19 +111,43 @@ def show_Toronto_2024_Electricity_Demand_Forecast():
     st.write(f"XGBoost Model Mean Absolute Percentage Error (2024): {mape}%")
     st.write(f"XGBoost Model Maximum Absolute Error (2024): {max_absolute_error} (MW)")
 
-    # First, filter the 'test_data_predictions' DataFrame for today or future dates.
-    today = pd.Timestamp(datetime.now().date())  # Get today's date
+#     # First, filter the 'test_data_predictions' DataFrame for today or future dates.
+#     today = pd.Timestamp(datetime.now().date())  # Get today's date
+#     test_data_predictions['ds'] = pd.to_datetime(test_data_predictions['ds'])
+#     future_data = test_data_predictions[test_data_predictions['ds'] >= today]
+
+#     # Then, create a new DataFrame with formatted columns to match the desired table structure.
+#     table_to_display = future_data.copy()
+#     table_to_display['Date'] = table_to_display['ds'].dt.date
+#     table_to_display['Time'] = table_to_display['ds'].dt.time
+#     table_to_display = table_to_display[['Date', 'Time', 'y_predictions_xgb']]
+
+#     # Rename the 'y_predictions_xgb' column to 'XGBoost Forecast Demand' for display.
+#     table_to_display.rename(columns={'y_predictions_xgb': 'XGBoost Forecast Demand (MW)'}, inplace=True)
+
+#     # Now, display this table in the Streamlit app.
+#     st.table(table_to_display)
+    
+#     # ... [the previous part of your Streamlit app code] ...
+
+    # Convert the 'ds' column to datetime if it's not already
     test_data_predictions['ds'] = pd.to_datetime(test_data_predictions['ds'])
+
+    # Filter the DataFrame for dates that are today or in the future
+    today = pd.Timestamp(datetime.now().date())  # Get today's date
     future_data = test_data_predictions[test_data_predictions['ds'] >= today]
 
-    # Then, create a new DataFrame with formatted columns to match the desired table structure.
+    # Create the table display
     table_to_display = future_data.copy()
     table_to_display['Date'] = table_to_display['ds'].dt.date
     table_to_display['Time'] = table_to_display['ds'].dt.time
+
+    # Round the 'XGBoost Forecast Demand' to two decimal places
+    table_to_display['y_predictions_xgb'] = table_to_display['y_predictions_xgb'].round(2)
+
+    # Select and rename the columns for the table
     table_to_display = table_to_display[['Date', 'Time', 'y_predictions_xgb']]
+    table_to_display.rename(columns={'y_predictions_xgb': 'XGBoost Forecast Demand'}, inplace=True)
 
-    # Rename the 'y_predictions_xgb' column to 'XGBoost Forecast Demand' for display.
-    table_to_display.rename(columns={'y_predictions_xgb': 'XGBoost Forecast Demand (MW)'}, inplace=True)
-
-    # Now, display this table in the Streamlit app.
-    st.table(table_to_display)
+    # Use Streamlit to display the table without the index
+    st.table(table_to_display.set_index(pd.Index([i for i in range(len(table_to_display))])))
