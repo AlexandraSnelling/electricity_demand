@@ -96,7 +96,7 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
 
     # Step 1: Widget for date range selection
     start_date, end_date = st.slider(
-        'Date range:',
+        'Select Date Range:',
         min_value=min_date.to_pydatetime(),  # Convert to Python datetime just in case
         max_value=max_date.to_pydatetime(),  # Convert to Python datetime just in case
         value=(min_date.to_pydatetime(), max_date.to_pydatetime()),  # Ensure both are the same type
@@ -156,7 +156,7 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
 
     # Widget for selecting which predictions to display
     prediction_options = st.multiselect(
-        'Select Models to display:',
+        'Select Models to Display:',
         options=list(name_mapping.values()),  # Display names instead of column names
         default=list(name_mapping.values())
     )
@@ -174,10 +174,11 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
         column_name = [key for key, value in name_mapping.items() if value == display_name][0]
         ax.plot(filtered_data['ds'], filtered_data[column_name], label=f'{display_name} Predictions')
 
-    ax.set_xlabel('Date/Time', fontsize=18)
-    ax.set_ylabel('Demand (MW)', fontsize=18)
-    plt.xticks(rotation=45, ha='right', fontsize=16)  # Rotate labels and set font size
-    ax.set_title('2023 Hourly Toronto Electricity Forecast vs. Actual Demand', fontsize=22)
+    ax.set_xlabel('Date/Time', fontsize=20)
+    ax.set_ylabel('Demand (MW)', fontsize=20)
+    plt.xticks(rotation=45, ha='right', fontsize=18)  # Rotate labels and set font size
+    ax.tick_params(axis='y', labelsize=18)
+    ax.set_title('2023 Hourly Toronto Electricity Forecast vs. Actual Demand', fontsize=24)
     plt.tight_layout()  # This will make sure the labels and title fit into the figure area
     ax.legend(fontsize=22)
     st.pyplot(fig)
