@@ -71,10 +71,10 @@ def show_Toronto_2024_Electricity_Demand_Forecast():
     mape = round((abs((y - y_predict) / y).mean()) * 100, 2)
 
     # Calculate the Absolute Percentage Error for each prediction
-    absolute_percentage_errors = abs((y - y_predict) / y) * 100
+    absolute_errors = round(abs((y - y_predict) / y), 2)
 
     # Find the maximum absolute percentage error
-    max_absolute_percentage_error = absolute_percentage_errors.max()
+    max_absolute_error = absolute_errors.max()
 
     # define data to be plotted
     plot_data = pd.concat([test_data.set_index('ds')['y'], test_data_predictions.set_index('ds')['y_predictions_xgb']], axis=1)
@@ -117,7 +117,7 @@ def show_Toronto_2024_Electricity_Demand_Forecast():
     
     # # write with Streamlit
     st.write(f"Mean Absolute Percentage Error: {mape}%")
-    st.write(f"Maximum Absolute Percentage Error: {max_absolute_percentage_error}%")
+    st.write(f"Maximum Absolute Error: {max_absolute_error} (MW)")
 
 
     # # Filter the original and predicted dataframes based on selected date range
