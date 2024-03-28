@@ -103,11 +103,62 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
         format='MM/DD/YYYY'
     )
 
+#     # Widget for selecting which predictions to display
+#     prediction_options = st.multiselect(
+#         'Select prediction lines to display:',
+#         options=['y_pred_lstm', 'y_pred_prophet', 'y_pred_xgb'],
+#         default=['y_pred_lstm', 'y_pred_prophet', 'y_pred_xgb']
+#     )
+
+#     # Filter data based on selected date range
+#     filtered_data = forecast_data_2023[(forecast_data_2023['ds'] >= start_date) & (forecast_data_2023['ds'] <= end_date)]
+
+#     # Plotting
+#     fig, ax = plt.subplots(figsize=(34, 12))
+#     ax.plot(filtered_data['ds'], filtered_data['y'], label='Actual Demand')
+   
+#     # Dynamically add selected prediction lines
+#     if 'y_pred_lstm' in prediction_options:
+#         ax.plot(filtered_data['ds'], filtered_data['y_pred_lstm'], label='LSTM Predictions')
+#     if 'y_pred_prophet' in prediction_options:
+#         ax.plot(filtered_data['ds'], filtered_data['y_pred_prophet'], label='Prophet Predictions')
+#     if 'y_pred_xgb' in prediction_options:
+#         ax.plot(filtered_data['ds'], filtered_data['y_pred_xgb'], label='XGBoost Predictions')
+
+#     ax.set_xlabel('Date/Time')
+#     ax.set_ylabel('Demand')
+#     plt.xticks(rotation=45, ha='right', fontsize=10)  # Rotate labels and set font size
+#     plt.tight_layout()  # This will make sure the labels and title fit into the figure area
+#     ax.legend()
+#     st.pyplot(fig)
+
+#     # MAPE and Max Absolute Percentage Error Calculation & Display
+    
+#     for option in prediction_options:
+#         y_true = filtered_data['y']
+#         y_pred = filtered_data[option]
+
+#         # Calculate MAPE
+#         mape_floating = np.mean(np.abs((y_true - y_pred) / y_true)) * 100
+        
+#         # Calculate Max Absolute Percentage Error
+#         # max_error_floating = np.max(np.abs((y_true - y_pred) / y_true)) * 100
+
+#         st.write(f"MAPE for {option}: {mape_floating:.2f}%")
+#         # st.write(f"Max Absolute Percentage Error for {option}: {max_error_floating:.2f}%")   
+        
+    # Define a mapping from column names to display names
+    name_mapping = {
+        'y_pred_lstm': 'LSTM',
+        'y_pred_prophet': 'Prophet',
+        'y_pred_xgb': 'XGB'
+    }
+
     # Widget for selecting which predictions to display
     prediction_options = st.multiselect(
         'Select prediction lines to display:',
-        options=['y_pred_lstm', 'y_pred_prophet', 'y_pred_xgb'],
-        default=['y_pred_lstm', 'y_pred_prophet', 'y_pred_xgb']
+        options=list(name_mapping.values()),  # Display names instead of column names
+        default=list(name_mapping.values())
     )
 
     # Filter data based on selected date range
@@ -116,14 +167,12 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
     # Plotting
     fig, ax = plt.subplots(figsize=(34, 12))
     ax.plot(filtered_data['ds'], filtered_data['y'], label='Actual Demand')
-   
-    # Dynamically add selected prediction lines
-    if 'y_pred_lstm' in prediction_options:
-        ax.plot(filtered_data['ds'], filtered_data['y_pred_lstm'], label='LSTM Predictions')
-    if 'y_pred_prophet' in prediction_options:
-        ax.plot(filtered_data['ds'], filtered_data['y_pred_prophet'], label='Prophet Predictions')
-    if 'y_pred_xgb' in prediction_options:
-        ax.plot(filtered_data['ds'], filtered_data['y_pred_xgb'], label='XGBoost Predictions')
+
+    # Dynamically add selected prediction lines using the mapping to get the correct column names
+    for display_name in prediction_options:
+        # Find the column name that corresponds to the selected display name
+        column_name = [key for key, value in name_mapping.items() if value == display_name][0]
+        ax.plot(filtered_data['ds'], filtered_data[column_name], label=f'{display_name} Predictions')
 
     ax.set_xlabel('Date/Time')
     ax.set_ylabel('Demand')
@@ -133,16 +182,17 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
     st.pyplot(fig)
 
     # MAPE and Max Absolute Percentage Error Calculation & Display
-    
-    for option in prediction_options:
+    for display_name in prediction_options:
+        # Find the column name that corresponds to the selected display name
+        column_name = [key for key, value in name_mapping.items() if value == display_name][0]
         y_true = filtered_data['y']
-        y_pred = filtered_data[option]
+        y_pred = filtered_data[column_name]
 
         # Calculate MAPE
         mape_floating = np.mean(np.abs((y_true - y_pred) / y_true)) * 100
-        
         # Calculate Max Absolute Percentage Error
         # max_error_floating = np.max(np.abs((y_true - y_pred) / y_true)) * 100
 
-        st.write(f"MAPE for {option}: {mape_floating:.2f}%")
-        # st.write(f"Max Absolute Percentage Error for {option}: {max_error_floating:.2f}%")     
+        # Display using the display names
+        st.write(f"MAPE for {display_name}: {mape_floating:.2f}%")
+        # st.write(f"Max Absolute Percentage Error for {display_name}: {max_error_floating:.2f}%")
