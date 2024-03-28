@@ -194,5 +194,5 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
         # max_error_floating = np.max(np.abs((y_true - y_pred) / y_true)) * 100
 
         # Display using the display names
-        st.write(f"MAPE for {display_name}: {mape_floating:.2f}%")
+        st.write(f"{display_name} Mean Absolute Percentage Error for {start_date} to {end_date}: {mape_floating:.2f}%")
         # st.write(f"Max Absolute Percentage Error for {display_name}: {max_error_floating:.2f}%")
