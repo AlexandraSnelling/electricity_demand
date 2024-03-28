@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.metrics import r2_score, mean_absolute_error, max_error
 
 def show_Toronto_2023_Electricity_Demand_Modeling():
     # st.title("Forecast Page")
@@ -85,4 +86,39 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
         max_error = np.max(np.abs((y_true - y_pred) / y_true)) * 100
 
         st.write(f"MAPE for {option}: {mape:.2f}%")
-        st.write(f"Max Absolute Percentage Error for {option}: {max_error:.2f}%")
+        # st.write(f"Max Absolute Percentage Error for {option}: {max_error:.2f}%") 
+
+    def calculate_metrics(y_true, y_pred):
+        r2 = r2_score(y_true, y_pred)
+        mape = np.mean(np.abs((y_true - y_pred) / y_true)) * 100
+        mean_abs_error = mean_absolute_error(y_true, y_pred)
+        max_abs_error = max_error(y_true, y_pred)
+        return r2, mape, mean_abs_error, max_abs_error
+
+    def show_evaluation_table(forecast_data):
+        # Calculate metrics for each model and populate the dictionary
+        model_metrics = {
+            'Model': ['LSTM', 'Prophet', 'XGB'],
+            'R2': [],
+            'Mean Absolute % Error': [],
+            'Mean Absolute Error (MW)': [],
+            'Maximum Absolute Error (MW)': []
+        }
+
+        for model in model_metrics['Model']:
+            y_true = forecast_data['y']
+            y_pred = forecast_data[f'y_pred_{model.lower()}']
+            r2, mape, mean_abs_error, max_abs_error = calculate_metrics(y_true, y_pred)
+
+            model_metrics['R2'].append(r2)
+            model_metrics['Mean Absolute % Error'].append(mape)
+            model_metrics['Mean Absolute Error (MW)'].append(mean_abs_error)
+            model_metrics['Maximum Absolute Error (MW)'].append(max_abs_error)
+
+        # Convert the dictionary to a DataFrame and display using Streamlit
+        metrics_df = pd.DataFrame(model_metrics)
+        st.table(metrics_df)
+
+    # Place this function call where you want the evaluation table to be displayed in your app
+    show_evaluation_table(forecast_data_2023)
+
