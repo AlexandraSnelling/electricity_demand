@@ -2,7 +2,8 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.metrics import r2_score, mean_absolute_error, max_error
+from sklearn.metrics import r2_score, mean_absolute_error
+from sklearn.metrics import max_error as max_error_metric
 
 def show_Toronto_2023_Electricity_Demand_Modeling():
     # st.title("Forecast Page")
@@ -88,13 +89,20 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
         st.write(f"MAPE for {option}: {mape:.2f}%")
         # st.write(f"Max Absolute Percentage Error for {option}: {max_error:.2f}%") 
 
+    # def calculate_metrics(y_true, y_pred):
+    #     r2 = r2_score(y_true, y_pred)
+    #     mape = np.mean(np.abs((y_true - y_pred) / y_true)) * 100
+    #     mean_abs_error = mean_absolute_error(y_true, y_pred)
+    #     max_abs_error = max_error(y_true, y_pred)
+    #     return r2, mape, mean_abs_error, max_abs_error
+
     def calculate_metrics(y_true, y_pred):
         r2 = r2_score(y_true, y_pred)
         mape = np.mean(np.abs((y_true - y_pred) / y_true)) * 100
         mean_abs_error = mean_absolute_error(y_true, y_pred)
-        max_abs_error = max_error(y_true, y_pred)
+        max_abs_error = max_error_metric(y_true, y_pred)  # Use the explicitly imported function
         return r2, mape, mean_abs_error, max_abs_error
-
+    
     def show_evaluation_table(forecast_data):
         # Calculate metrics for each model and populate the dictionary
         model_metrics = {
@@ -122,3 +130,6 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
     # Place this function call where you want the evaluation table to be displayed in your app
     show_evaluation_table(forecast_data_2023)
 
+
+
+    
