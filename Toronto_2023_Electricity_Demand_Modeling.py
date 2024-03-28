@@ -157,7 +157,7 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
     def show_evaluation_table(forecast_data):
         # Calculate metrics for each model and create a DataFrame
         model_metrics = {
-            'Model': ['LSTM', 'Prophet', 'XGBoost'],
+            'Model': ['LSTM', 'Prophet', 'XGB'],
             'R2': [],
             'Mean Absolute % Error': [],
             'Mean Absolute Error (MW)': [],
