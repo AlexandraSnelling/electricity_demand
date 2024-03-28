@@ -9,7 +9,7 @@ def show_Toronto_2024_Electricity_Demand_Forecast():
     # st.title("Forecast Page")
 
     # Title of your app
-    st.title('2024 Hourly Electricity Demand: Toronto Ontario')
+    st.title('2024 Toronto Electricity Demand Forecasting')
 
     # Inject custom CSS with the <style> tag
     style = """
@@ -96,15 +96,25 @@ def show_Toronto_2024_Electricity_Demand_Forecast():
     fig, ax = plt.subplots(figsize=(34, 12))  
     # plot_data.plot(ax=ax)
     plot_data_filtered.plot(ax=ax)
-    ax.set_xlabel('Date/Time', fontsize=18)
-    ax.set_ylabel('Demand', fontsize=18)
-    ax.tick_params(axis='x', labelsize=16)
-    ax.tick_params(axis='y', labelsize=16)  
-    ax.set_title('Hourly Toronto Electricity Demand vs. Predicted Demand', fontsize=22)
+    ax.set_xlabel('Date/Time', fontsize=20)
+    ax.set_ylabel('Demand', fontsize=20)
+    plt.xticks(rotation=45, ha='right', fontsize=18)
+    ax.tick_params(axis='y', labelsize=18)  
+    ax.set_title('Hourly Toronto Electricity Demand vs. Predicted Demand', fontsize=24)
+    plt.tight_layout() 
     ax.legend(fontsize=22)
     st.pyplot(fig)
 
 
+    #     ax.set_xlabel('Date/Time', fontsize=20)
+    # ax.set_ylabel('Demand (MW)', fontsize=20)
+    # plt.xticks(rotation=45, ha='right', fontsize=18)  # Rotate labels and set font size
+    # ax.tick_params(axis='y', labelsize=18)
+    # ax.set_title('2023 Hourly Toronto Electricity Forecast vs. Actual Demand', fontsize=24)
+    # plt.tight_layout()  # This will make sure the labels and title fit into the figure area
+    # ax.legend(fontsize=22)
+    # st.pyplot(fig)
+    
     # # write with Streamlit
     st.write(f"Mean Absolute Percentage Error: {mape}%")
     st.write(f"Maximum Absolute Percentage Error: {max_absolute_percentage_error}%")
