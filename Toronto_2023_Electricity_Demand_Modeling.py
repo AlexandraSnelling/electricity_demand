@@ -156,7 +156,7 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
 
     # Widget for selecting which predictions to display
     prediction_options = st.multiselect(
-        'Select prediction lines to display:',
+        'Select Models to display:',
         options=list(name_mapping.values()),  # Display names instead of column names
         default=list(name_mapping.values())
     )
@@ -174,12 +174,24 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
         column_name = [key for key, value in name_mapping.items() if value == display_name][0]
         ax.plot(filtered_data['ds'], filtered_data[column_name], label=f'{display_name} Predictions')
 
-    ax.set_xlabel('Date/Time')
-    ax.set_ylabel('Demand')
-    plt.xticks(rotation=45, ha='right', fontsize=10)  # Rotate labels and set font size
+    ax.set_xlabel('Date/Time', fontsize=18)
+    ax.set_ylabel('Demand (MW)', fontsize=18)
+    plt.xticks(rotation=45, ha='right', fontsize=16)  # Rotate labels and set font size
+    ax.set_title('2023 Hourly Toronto Electricity Forecast vs. Actual Demand', fontsize=22)
     plt.tight_layout()  # This will make sure the labels and title fit into the figure area
-    ax.legend()
+    ax.legend(fontsize=22)
     st.pyplot(fig)
+    
+    # fig, ax = plt.subplots(figsize=(34, 12))  
+    # # plot_data.plot(ax=ax)
+    # plot_data_filtered.plot(ax=ax)
+    # ax.set_xlabel('Date/Time', fontsize=18)
+    # ax.set_ylabel('Demand', fontsize=18)
+    # ax.tick_params(axis='x', labelsize=16)
+    # ax.tick_params(axis='y', labelsize=16)  
+    # ax.set_title('Hourly Toronto Electricity Demand vs. Predicted Demand', fontsize=22)
+    # ax.legend(fontsize=22)
+    # st.pyplot(fig)
 
     # MAPE and Max Absolute Percentage Error Calculation & Display
     for display_name in prediction_options:
