@@ -76,11 +76,10 @@ def show_Toronto_2024_Electricity_Demand_Forecast():
 
     # Find the maximum absolute percentage error
     max_absolute_error = absolute_errors.max()
-    # max_absolute_error = "{:.2f}".format(max_error(y, y_pred)
     
     # define data to be plotted
     plot_data = pd.concat([test_data.set_index('ds')['y'], test_data_predictions.set_index('ds')['y_predictions_xgb']], axis=1)
-    plot_data.columns = ['Demand', 'Predicted Demand']
+    plot_data.columns = ['Demand', 'XGBoost Forecast Demand']
 
 
     # Step 3: Select Dates, Plot Data and Calculate MAPE
@@ -102,7 +101,7 @@ def show_Toronto_2024_Electricity_Demand_Forecast():
     ax.set_ylabel('Demand', fontsize=20)
     plt.xticks(rotation=45, ha='right', fontsize=18)
     ax.tick_params(axis='y', labelsize=18)  
-    ax.set_title('Hourly Toronto Electricity Demand vs. Predicted Demand', fontsize=24)
+    ax.set_title('2024 Hourly Toronto Electricity XGBoost Model Forecast vs. Actual Demand', fontsize=24)
     plt.tight_layout() 
     ax.legend(fontsize=22)
     st.pyplot(fig)
@@ -118,8 +117,8 @@ def show_Toronto_2024_Electricity_Demand_Forecast():
     # st.pyplot(fig)
     
     # # write with Streamlit
-    st.write(f"Mean Absolute Percentage Error: {mape}%")
-    st.write(f"Maximum Absolute Error: {max_absolute_error} (MW)")
+    st.write(f"XGBoost Model Mean Absolute Percentage Error (2024): {mape}%")
+    st.write(f"XGBoost Model Maximum Absolute Error (2024): {max_absolute_error} (MW)")
 
 
     # # Filter the original and predicted dataframes based on selected date range
