@@ -144,14 +144,12 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
         
 #         st.table(metrics_df)
 
-    # # Place this function call where you want the evaluation table to be displayed in your app
-    # show_evaluation_table(forecast_data_2023)
-
     def calculate_metrics(y_true, y_pred):
-        r2 = round(r2_score(y_true, y_pred), 2)
-        mape = round(np.mean(np.abs((y_true - y_pred) / y_true)) * 100, 2)
-        mean_abs_error = round(mean_absolute_error(y_true, y_pred), 2)
-        max_abs_error = round(max_error_metric(y_true, y_pred), 2)
+        # Formatting the metrics directly to strings with two decimal places
+        r2 = "{:.2f}".format(r2_score(y_true, y_pred))
+        mape = "{:.2f}".format(np.mean(np.abs((y_true - y_pred) / y_true)) * 100)
+        mean_abs_error = "{:.2f}".format(mean_absolute_error(y_true, y_pred))
+        max_abs_error = "{:.2f}".format(max_error_metric(y_true, y_pred))
         return r2, mape, mean_abs_error, max_abs_error
 
     def show_evaluation_table(forecast_data):
@@ -169,22 +167,27 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
             y_pred = forecast_data[f'y_pred_{model.lower()}']
             r2, mape, mean_abs_error, max_abs_error = calculate_metrics(y_true, y_pred)
 
+            # Convert metrics directly to strings
             model_metrics['R2'].append(r2)
             model_metrics['Mean Absolute % Error'].append(mape)
             model_metrics['Mean Absolute Error (MW)'].append(mean_abs_error)
             model_metrics['Maximum Absolute Error (MW)'].append(max_abs_error)
 
-        # Convert the dictionary to a DataFrame and round all numeric columns to two decimal places
-        metrics_df = pd.DataFrame(model_metrics).round(2)
+        # Convert the dictionary to a DataFrame
+        metrics_df = pd.DataFrame(model_metrics)
 
         # Apply custom CSS to style the table with a white background, black border, and black text
         st.markdown("""
             <style>
-                .stTable, .stTable td, .stTable th {
-                    color: black !important;
-                    background-color: white !important;
-                    border: 1px solid black !important;
-                }
+                .st-emotion-css-1 { border: 1px solid black; }
+                .css-1cpxqw2 { border-collapse: collapse; }
+                .st-eg { border-collapse: collapse; }
+                .st-cj { border-collapse: collapse; }
+                table { color: black !important; background-color: white !important; }
+                th { color: black !important; background-color: white !important; border: 1px solid black !important; }
+                td { color: black !important; background-color: white !important; border: 1px solid black !important; }
+                .st-df { border: none !important; }
+                .st-bw { border: none !important; }
             </style>
             """, unsafe_allow_html=True)
 
