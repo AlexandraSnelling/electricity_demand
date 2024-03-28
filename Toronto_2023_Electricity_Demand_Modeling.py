@@ -5,14 +5,15 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import r2_score, mean_absolute_error
 from sklearn.metrics import max_error as max_error_metric
 
+# function called from app.py homepage when Modeling button selected
 def show_Toronto_2023_Electricity_Demand_Modeling():
     # st.title("Forecast Page")
 
-    # Title of your app
+    # Page title
     st.title('Model Evaluation:')
     st.title('Actual vs Forecast Demand 2023 Toronto Electricity')
 
-    # Inject custom CSS with the <style> tag
+    # Custom CSS with <style> tag
     style = """
     <style>
         .stApp {
@@ -29,123 +30,8 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
     # Convert 'ds' to datetime just in case it's not in the right format
     forecast_data_2023['ds'] = pd.to_datetime(forecast_data_2023['ds'])
 
-    # def calculate_metrics(y_true, y_pred):
-    #     r2 = r2_score(y_true, y_pred)
-    #     mape = np.mean(np.abs((y_true - y_pred) / y_true)) * 100
-    #     mean_abs_error = mean_absolute_error(y_true, y_pred)
-    #     max_abs_error = max_error(y_true, y_pred)
-    #     return r2, mape, mean_abs_error, max_abs_error
-    
-#     def calculate_metrics(y_true, y_pred):
-#         r2 = r2_score(y_true, y_pred)
-#         mape = np.mean(np.abs((y_true - y_pred) / y_true)) * 100
-#         mean_abs_error = mean_absolute_error(y_true, y_pred)
-#         max_abs_error = max_error_metric(y_true, y_pred)
-#         return r2, mape, mean_abs_error, max_abs_error
-    
-#     def format_metrics(metrics):
-#         # Format each metric as a string to avoid trailing zeros
-#         return {k: f"{v:.2f}" for k, v in metrics.items()}
-
-#     def show_evaluation_table(forecast_data):
-#         # Calculate metrics for each model and populate the dictionary
-#         model_metrics = {
-#             'Model': ['LSTM', 'Prophet', 'XGB'],
-#             'R2': [],
-#             'Mean Absolute % Error': [],
-#             'Mean Absolute Error (MW)': [],
-#             'Maximum Absolute Error (MW)': []
-#         }
-
-#         for model in model_metrics['Model']:
-#             y_true = forecast_data['y']
-#             y_pred = forecast_data[f'y_pred_{model.lower()}']
-#             r2, mape, mean_abs_error, max_abs_error = calculate_metrics(y_true, y_pred)
-
-#             model_metrics['R2'].append(r2)
-#             model_metrics['Mean Absolute % Error'].append(mape)
-#             model_metrics['Mean Absolute Error (MW)'].append(mean_abs_error)
-#             model_metrics['Maximum Absolute Error (MW)'].append(max_abs_error)
-
-#         # Format the metrics to avoid trailing zeros and round them off to two decimal places
-#         model_metrics_formatted = {model: format_metrics(metrics) for model, metrics in model_metrics.items()}
-
-#         # Convert the dictionary to a DataFrame
-#         metrics_df = pd.DataFrame(model_metrics_formatted).T  # Transpose to get models as rows
-
-#         # Apply custom CSS to style the table with a white background, black border, and black text
-#         st.markdown("""
-#             <style>
-#                 table {
-#                     color: black !important;
-#                     background-color: white !important;
-#                 }
-#                 th {
-#                     color: black !important;
-#                     background-color: white !important;
-#                     border: 1px solid black !important;
-#                 }
-#                 td {
-#                     color: black !important;
-#                     background-color: white !important;
-#                     border: 1px solid black !important;
-#                 }
-#                 .dataframe {
-#                     border-collapse: collapse !important;
-#                 }
-#             </style>
-#             """, unsafe_allow_html=True)
-
-#         # Display the DataFrame as a table
-#         st.table(metrics_df)
-    
-    
-#     def show_evaluation_table(forecast_data):
-#         # Calculate metrics for each model and populate the dictionary
-#         model_metrics = {
-#             'Model': ['LSTM', 'Prophet', 'XGB'],
-#             'R2': [],
-#             'Mean Absolute % Error': [],
-#             'Mean Absolute Error (MW)': [],
-#             'Maximum Absolute Error (MW)': []
-#         }
-
-#         for model in model_metrics['Model']:
-#             y_true = forecast_data['y']
-#             y_pred = forecast_data[f'y_pred_{model.lower()}']
-#             r2, mape, mean_abs_error, max_abs_error = calculate_metrics(y_true, y_pred)
-
-#             model_metrics['R2'].append(r2)
-#             model_metrics['Mean Absolute % Error'].append(mape)
-#             model_metrics['Mean Absolute Error (MW)'].append(mean_abs_error)
-#             model_metrics['Maximum Absolute Error (MW)'].append(max_abs_error)
-
-#         # Convert the dictionary to a DataFrame, round and display using Streamlit
-#         metrics_df = pd.DataFrame(model_metrics).round(2)
-        
-#         # Apply custom CSS to style the table with a white background, black border, and black text
-#         st.markdown("""
-#         <style>
-#             table {
-#                 color: black !important;
-#                 background-color: white !important;
-#             }
-#             th {
-#                 color: black !important;
-#                 background-color: white !important;
-#             }
-#             td {
-#                 color: black !important;
-#                 background-color: white !important;
-#                 border: 1px solid black !important;
-#             }
-#         </style>
-#         """, unsafe_allow_html=True)
-        
-#         st.table(metrics_df)
-
     def calculate_metrics(y_true, y_pred):
-        # Formatting the metrics directly to strings with two decimal places
+        # Define calculation of each metric and format to strings with two decimal places
         r2 = "{:.2f}".format(r2_score(y_true, y_pred))
         mape = "{:.2f}".format(np.mean(np.abs((y_true - y_pred) / y_true)) * 100)
         mean_abs_error = "{:.2f}".format(mean_absolute_error(y_true, y_pred))
@@ -192,7 +78,7 @@ def show_Toronto_2023_Electricity_Demand_Modeling():
             """, unsafe_allow_html=True)
 
         # Display the DataFrame as a table
-        st.table(metrics_df)
+        st.table(metrics_df.iloc[:, 1:])
 
     # Call the function to display the evaluation table
     show_evaluation_table(forecast_data_2023)
