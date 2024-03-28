@@ -72,11 +72,11 @@ def show_Toronto_2024_Electricity_Demand_Forecast():
     mape = round((abs((y - y_predict) / y).mean()) * 100, 2)
 
     # Calculate the Absolute Percentage Error for each prediction
-    absolute_errors = round(abs((y - y_predict) / y), 2)
+    absolute_errors = round(abs(y - y_predict), 2)
 
     # Find the maximum absolute percentage error
-    # max_absolute_error = absolute_errors.max()
-    max_absolute_error = "{:.2f}".format(max_error(y, y_pred)
+    max_absolute_error = absolute_errors.max()
+    # max_absolute_error = "{:.2f}".format(max_error(y, y_pred)
     
     # define data to be plotted
     plot_data = pd.concat([test_data.set_index('ds')['y'], test_data_predictions.set_index('ds')['y_predictions_xgb']], axis=1)
