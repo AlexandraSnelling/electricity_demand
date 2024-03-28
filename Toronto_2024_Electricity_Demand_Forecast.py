@@ -113,6 +113,7 @@ def show_Toronto_2024_Electricity_Demand_Forecast():
 
     # First, filter the 'test_data_predictions' DataFrame for today or future dates.
     today = pd.Timestamp(datetime.now().date())  # Get today's date
+    test_data_predictions['ds'] = pd.to_datetime(test_data_predictions['ds'])
     future_data = test_data_predictions[test_data_predictions['ds'] >= today]
 
     # Then, create a new DataFrame with formatted columns to match the desired table structure.
